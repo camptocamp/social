@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <template id="digest_layout" name="Mail digest layout">
-        <body>
-            <html>
+        <html>
+            <body>
                 <img style="float: right" t-attf-src="data:image;base64,{{env.user.company_id.logo}}" />
                 <!-- if some template calling us sets this variable,
                      we print a h1 tag /-->
@@ -21,22 +21,27 @@
                 <footer t-if="email_use_user_signature">
                     <t t-raw="env.user.signature" />
                 </footer>
-            </html>
-        </body>
+            </body>
+        </html>
     </template>
 
     <template id="default_digest_tmpl" name="Mail digest default template">
         <t t-call="mail_digest.digest_layout">
-            <h2>Dear <span t-field="digest.partner_id" />,</h2>
-            <t t-foreach="grouped_messages.iterkeys()" t-as="gkey">
-                <t t-set="messages" t-value="grouped_messages[gkey]" />
-                <t t-foreach="messages" t-as="msg">
-                    <div style="margin:20px">
-                        <h3 t-esc="msg.subject" />
-                        <t t-raw="msg.body" />
-                    </div>
-                </t>
-            </t>
+            <div id="mail_content">
+                <h2>Dear <span t-field="digest.partner_id" />,</h2>
+                <div id="mail_inner_content">
+                    <t t-foreach="grouped_messages.iterkeys()" t-as="gkey">
+                        <t t-set="messages" t-value="grouped_messages[gkey]" />
+                        <t t-foreach="messages" t-as="msg">
+                            <div style="margin:20px">
+                                <h3 t-esc="msg.subject" />
+                                <t t-raw="msg.body" />
+                            </div>
+                        </t>
+                    </t>
+                </div>
+            </div>
         </t>
     </template>
+
 </odoo>

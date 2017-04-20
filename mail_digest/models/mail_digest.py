@@ -96,15 +96,24 @@ class MailDigest(models.Model):
         return subject
 
     @api.multi
-    def _get_email_values(self, template=None):
+    def _get_template_values(self):
         self.ensure_one()
-        template = template or self._get_template()
         subject = self._get_subject()
         template_values = {
             'digest': self,
             'subject': subject,
             'grouped_messages': self._message_group_by(),
+            'base_url':
+                self.env['ir.config_parameter'].get_param('web.base.url'),
         }
+        return template_values
+
+    @api.multi
+    def _get_email_values(self, template=None):
+        self.ensure_one()
+        template = template or self._get_template()
+        subject = self._get_subject()
+        template_values = self._get_template_values()
         values = {
             'recipient_ids': [(4, self.partner_id.id)],
             'subject': subject,
