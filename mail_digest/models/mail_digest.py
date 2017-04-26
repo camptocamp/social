@@ -131,8 +131,8 @@ class MailDigest(models.Model):
         mail_model = self.env['mail.mail'].with_context(
             **self._create_mail_context())
         for item in self:
-            self.mail_id = mail_model.create(
-                self._get_email_values(template=template))
+            item.mail_id = mail_model.create(
+                item._get_email_values(template=template))
 
     @api.model
     def process(self, frequency='daily', domain=None):
