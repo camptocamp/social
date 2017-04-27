@@ -109,7 +109,6 @@ class ResPartner(models.Model):
         message_sudo = message.sudo()
         if not message_sudo.message_type == 'email':
             return
-        # TODO: what to do when a partner updates frequency?
         self.env['mail.digest'].sudo().create_or_update(self, message)
 
     @api.model
