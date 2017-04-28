@@ -2,13 +2,13 @@
 # Copyright 2017 Simone Orsi
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    notify_email = fields.Selection(selection_add=[('digest', 'Digest')])
+    notify_email = fields.Selection(selection_add=[('digest', _('Digest'))])
     notify_frequency = fields.Selection(
         string='Frequency',
         selection=[
