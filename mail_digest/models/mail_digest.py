@@ -117,13 +117,22 @@ class MailDigest(models.Model):
         values = {
             'recipient_ids': [(4, self.partner_id.id)],
             'subject': subject,
-            'body_html': template.render(template_values),
+            'body_html': template.with_context(
+                **self._template_context()
+            ).render(template_values),
         }
         return values
 
     def _create_mail_context(self):
         return {
-            'notify_only_recipients': True
+            'notify_only_recipients': True,
+        }
+
+    @api.multi
+    def _template_context(self):
+        self.ensure_one()
+        return {
+            'lang': self.partner_id.lang,
         }
 
     @api.multi
@@ -131,8 +140,10 @@ class MailDigest(models.Model):
         mail_model = self.env['mail.mail'].with_context(
             **self._create_mail_context())
         for item in self:
-            item.mail_id = mail_model.create(
-                item._get_email_values(template=template))
+            values = item.with_context(
+                **item._template_context()
+            )._get_email_values(template=template)
+            item.mail_id = mail_model.create(values)
 
     @api.model
     def process(self, frequency='daily', domain=None):

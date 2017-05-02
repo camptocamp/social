@@ -21,13 +21,13 @@ msgstr ""
 #: code:addons/mail_digest/models/mail_digest.py:93
 #, python-format
 msgid " - Daily update"
-msgstr " - Daily update"
+msgstr " täglich"
 
 #. module: mail_digest
 #: code:addons/mail_digest/models/mail_digest.py:95
 #, python-format
 msgid " - Weekly update"
-msgstr " - Weekly update"
+msgstr " wöchentlich"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_create_uid
