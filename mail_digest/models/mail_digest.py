@@ -2,6 +2,10 @@
 
 from openerp import fields, models, api, _
 
+import logging
+
+logger = logging.getLogger('[mail_digest]')
+
 
 class MailDigest(models.Model):
     _name = 'mail.digest'
@@ -139,11 +143,15 @@ class MailDigest(models.Model):
     def create_email(self, template=None):
         mail_model = self.env['mail.mail'].with_context(
             **self._create_mail_context())
+        created = False
         for item in self:
             values = item.with_context(
                 **item._template_context()
             )._get_email_values(template=template)
             item.mail_id = mail_model.create(values)
+            created = True
+        if created:
+            logger.info('Create email for digest IDS=%s', str(self.ids))
 
     @api.model
     def process(self, frequency='daily', domain=None):
