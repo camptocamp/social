@@ -143,4 +143,5 @@ class DigestCase(TransactionCase):
         for k in expected:
             self.assertIn(k, values)
 
+        self.assertEqual(self.env.user.company_id.email, values['email_from'])
         self.assertEqual([(4, self.partner1.id)], values['recipient_ids'])

@@ -119,6 +119,7 @@ class MailDigest(models.Model):
         subject = self._get_subject()
         template_values = self._get_template_values()
         values = {
+            'email_from': self.env.user.company_id.email,
             'recipient_ids': [(4, self.partner_id.id)],
             'subject': subject,
             'body_html': template.with_context(
