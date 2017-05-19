@@ -144,15 +144,19 @@ class MailDigest(models.Model):
     def create_email(self, template=None):
         mail_model = self.env['mail.mail'].with_context(
             **self._create_mail_context())
-        created = False
+        created = []
         for item in self:
+            if not item.message_ids:
+                # useless to create a mail for a digest w/ messages
+                # messages could be deleted by admin for instance.
+                continue
             values = item.with_context(
                 **item._template_context()
             )._get_email_values(template=template)
             item.mail_id = mail_model.create(values)
-            created = True
+            created.append(item.id)
         if created:
-            logger.info('Create email for digest IDS=%s', str(self.ids))
+            logger.info('Create email for digest IDS=%s', str(created))
 
     @api.model
     def process(self, frequency='daily', domain=None):
