@@ -88,15 +88,24 @@ class MailDigest(models.Model):
         # TODO: move this to a configurable field
         return self.env.ref('mail_digest.default_digest_tmpl')
 
+    def _get_site_name(self):
+        # default to company
+        name = self.env.user.company_id.name
+        if 'website' in self.env:
+            ws = self.env['website'].get_current_website()
+            if ws:
+                name = ws.name
+        return name
+
     @api.multi
     def _get_subject(self):
         # TODO: shall we move this to computed field?
         self.ensure_one()
-        subject = _('Digest')
+        subject = self._get_site_name() + ' '
         if self.partner_id.notify_frequency == 'daily':
-            subject += _(' - Daily update')
+            subject += _('Daily update')
         elif self.partner_id.notify_frequency == 'weekly':
-            subject += _(' - Weekly update')
+            subject += _('Weekly update')
         return subject
 
     @api.multi

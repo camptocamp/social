@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-28 07:07+0000\n"
+"POT-Creation-Date: 2017-05-23 07:08+0000\n"
 "PO-Revision-Date: 2017-04-27 16:55+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -16,18 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "X-Generator: Poedit 1.8.9\n"
-
-#. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:93
-#, python-format
-msgid " - Daily update"
-msgstr " täglich"
-
-#. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:95
-#, python-format
-msgid " - Weekly update"
-msgstr " wöchentlich"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_create_uid
@@ -47,7 +35,11 @@ msgid "Daily"
 msgstr "Täglich"
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:91
+#: code:addons/mail_digest/models/mail_digest.py:106
+msgid "Daily update"
+msgstr "täglich Übersicht"
+
+#. module: mail_digest
 #: code:addons/mail_digest/models/res_partner.py:11
 #: model:ir.actions.act_window,name:mail_digest.action_digest_all
 #: model:ir.ui.menu,name:mail_digest.menu_email_digest
@@ -171,6 +163,11 @@ msgstr "Status"
 #: selection:res.partner,notify_frequency:0
 msgid "Weekly"
 msgstr "Wöchentlich"
+
+#. module: mail_digest
+#: code:addons/mail_digest/models/mail_digest.py:108
+msgid "Weekly update"
+msgstr "wöchentlich Übersicht"
 
 #. module: mail_digest
 #: sql_constraint:partner.notification.conf:0
