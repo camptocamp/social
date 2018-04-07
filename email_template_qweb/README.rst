@@ -1,5 +1,6 @@
-.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+.. image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+   :target: https://www.gnu.org/licenses/agpl
+   :alt: License: AGPL-3
 
 ========================
 QWeb for email templates
@@ -16,22 +17,16 @@ Usage
 
 To use this module, you need to:
 
-* Select `QWeb` in the field `Body templating engine`
-* Select a QWeb view to be used to render the body field
-* Apart from QWeb's standard variables, you also have access to ``object`` and
+#. Select `QWeb` in the field `Body templating engine`
+#. Select a QWeb view to be used to render the body field
+#. Apart from QWeb's standard variables, you also have access to ``object`` and
   ``email_template``, which are browse records of the current object and the
   email template in use, respectively.
+#. Go to ...
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-    :alt: Try me on Runbot
-    :target: https://runbot.odoo-community.org/runbot/205/10.0
-
-Demo data contains an example on how to separate corporate identity from a
-template's content.
-
-For further information, please visit:
-
-* https://www.odoo.com/forum/help-1
+   :alt: Try me on Runbot
+   :target: https://runbot.odoo-community.org/runbot/205/11.0
 
 Bug Tracker
 ===========
@@ -43,6 +38,11 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 
 Credits
 =======
+
+Images
+------
+
+* Odoo Community Association: `Icon <https://odoo-community.org/logo.png>`_.
 
 Contributors
 ------------

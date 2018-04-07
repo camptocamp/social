@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# © 2016 Therp BV <http://therp.nl>
+# Copyright 2016 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "QWeb for email templates",
@@ -8,6 +7,7 @@
     "license": "AGPL-3",
     "category": "Marketing",
     "summary": "Use the QWeb templating mechanism for emails",
+    'website': 'https://github.com/OCA/social',
     "depends": [
         'mail',
     ],
