@@ -10,7 +10,7 @@ class TestMailInlineStyles(SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.mail_template = cls.env.ref(
-            'mail_inline_styles.email_template_demo')
+            'mail_inline_style.email_template_demo')
         cls.demo_user = cls.env.ref('base.user_demo')
 
     def to_xml_node(self, html_):
