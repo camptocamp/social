@@ -3,7 +3,7 @@
 from odoo import api, models
 
 try:
-    from premailer import transform
+    from premailer import Premailer
 except (ImportError, IOError) as err:
     import logging
     _logger = logging.getLogger(__name__)
@@ -18,8 +18,19 @@ class MailTemplate(models.Model):
         """Use `premailer` to convert styles to inline styles."""
         result = super().generate_email(res_ids, fields=fields)
         if isinstance(res_ids, int):
-            result['body_html'] = transform(result['body_html'])
+            premailer = Premailer(
+                html=result['body_html'],
+                **self._get_premailer_options(),
+            )
+            result['body_html'] = premailer.transform()
         else:
             for __, data in result.items():
-                data['body_html'] = transform(data['body_html'])
+                premailer = Premailer(
+                    html=data['body_html'],
+                    **self._get_premailer_options(),
+                )
+                data['body_html'] = premailer.transform()
         return result
+
+    def _get_premailer_options(self):
+        return {}
