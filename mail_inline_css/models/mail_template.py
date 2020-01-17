@@ -17,7 +17,6 @@ except (ImportError, IOError) as err:  # pragma: no cover
 class MailTemplate(models.Model):
     _inherit = "mail.template"
 
-    @api.multi
     def generate_email(self, res_ids, fields=None):
         """Use `premailer` to convert styles to inline styles."""
         result = super().generate_email(res_ids, fields=fields)
