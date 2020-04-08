@@ -46,6 +46,7 @@ Contributors
 * Holger Brunn <hbrunn@therp.nl>
 * Dave Lasley <dave@laslabs.com>
 * Carlos Lopez Mite <celm1990@gmail.com>
+* Simone Orsi <simone.orsi@camptocamp.com>
 
 Do not contact contributors directly about support or help with technical issues.
 
