@@ -22,7 +22,7 @@ class MailTemplate(models.Model):
             multi_mode = False
         result = super(MailTemplate, self).generate_email(res_ids, fields=fields)
         for res_id, template in self.get_email_template(res_ids).items():
-            if template.body_type == "qweb" and (not fields or "body_html" in fields):
+            if template.body_type == "qweb":
                 for record in self.env[template.model].browse(res_id):
                     body_html = template.body_view_id.render(
                         {"object": record, "email_template": template}
