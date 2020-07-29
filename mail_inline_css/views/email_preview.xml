@@ -7,7 +7,7 @@
         <!-- inject default value for lang to prevent call to generate_email method in
         default_get of the wizard-->
         <xpath expr="//button[@name='%(mail.wizard_email_template_preview)d']" position="attributes">
-            <attribute name="context">{'template_id':active_id, 'default_preview_lang': 'en_US'}</attribute>
+            <attribute name="context">{'template_id':active_id, 'default_preview_lang': context['lang']}</attribute>
         </xpath>
 
     </field>
