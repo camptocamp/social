@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2021 Camptocamp (http://www.camptocamp.com).
+    @author Iván Todorovich <ivan.todorovich@gmail.com>
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="mass_mailing.mailing_list_data" model="mailing.list">
+        <field name="subscribe_template_id" ref="mailing_list_subscribe" />
+        <field name="unsubscribe_template_id" ref="mailing_list_unsubscribe" />
+    </record>
+
+</odoo>
