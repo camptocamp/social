@@ -1,2 +1,5 @@
 mock
 odoo_test_helper
+
+odoo14-addon-mass_mailing_contact_partner @git+https://github.com/OCA/social@refs/pull/767/head#subdirectory=setup/mass_mailing_contact_partner
+odoo14-addon-mass_mailing_subscription_date @git+https://github.com/OCA/social@refs/pull/772/head#subdirectory=setup/mass_mailing_subscription_date
