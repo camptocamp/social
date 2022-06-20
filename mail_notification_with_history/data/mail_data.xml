@@ -7,7 +7,10 @@
     >
     <xpath expr="//div[@t-if='signature']" position="after">
 
-      <t t-set="message_history" t-value="message.get_notification_message_history()" />
+      <t
+                t-set="message_history"
+                t-value="message._get_notification_message_history()"
+            />
       <t t-if="message_history">
         <p class="message_history_title">Discussion history in Odoo:</p>
         <ul>

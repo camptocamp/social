@@ -7,12 +7,10 @@ from odoo import models
 class Message(models.Model):
     _inherit = "mail.message"
 
-    def get_notification_message_history(self):
+    def _get_notification_message_history(self):
         """Get the list of messages to include into an email notification history."""
-        if not self.env[self.model].with_mail_notification_history():
-            return []
-        if not self._with_notification_message_history():
-            return []
+        if not self.env[self.model]._mail_notification_include_history:
+            return self.browse()
         domain = self._get_notification_message_history_domain()
         messages = self.env["mail.message"].search(domain, order="date desc")
         return messages - self
@@ -23,7 +21,3 @@ class Message(models.Model):
             ("res_id", "=", self.res_id),
             ("message_type", "in", ("user_notification", "comment", "email")),
         ]
-
-    def _with_notification_message_history(self):
-        """Allow overriding to not include message history."""
-        return True

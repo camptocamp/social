@@ -25,11 +25,11 @@ class TestMailNotificationWithHistory(common.SavepointCase):
             "subtype": cls.message_subtype,
         }
 
-    def test_check_history_included(self):
+    def test_thread_history_is_included(self):
         with patch(
             (
                 "odoo.addons.mail_notification_with_history.models.mail_thread."
-                "MailThread.with_mail_notification_history"
+                "MailThread._mail_notification_include_history"
             ),
             new=Mock(return_value=True),
         ):
@@ -38,8 +38,7 @@ class TestMailNotificationWithHistory(common.SavepointCase):
             )
         self.assertTrue(body.find(b"Discussion") >= 0)
 
-    def test_check_history_is_not_included(self):
-        self.assertFalse(self.env["mail.thread"].with_mail_notification_history())
+    def test_thread_history_is_not_included(self):
         body = self.base_template._render(
             self.render_values, engine="ir.qweb", minimal_qcontext=True
         )
