@@ -19,5 +19,5 @@ class Message(models.Model):
         return [
             ("model", "=", self.model),
             ("res_id", "=", self.res_id),
-            ("message_type", "in", ("user_notification", "comment", "email")),
+            ("message_type", "in", ("comment", "email")),
         ]
