@@ -31,6 +31,5 @@
         "static/src/xml/failed_message/thread.xml",
         "static/src/xml/failed_message/discuss.xml",
     ],
-    "demo": ["demo/demo.xml"],
-    "pre_init_hook": "pre_init_hook",
+    "demo": ["demo/demo.xml"]
 }
