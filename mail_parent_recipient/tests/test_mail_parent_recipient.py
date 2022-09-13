@@ -57,6 +57,7 @@ class TestMailTemplate(TestMail):
         })
 
         composer = self.mail_comp_msg.with_context({
+            'test_parent_mail_recipient': True,
             'default_composition_mode': 'comment',
             'default_model': 'mail.channel',
             'default_use_template': True,

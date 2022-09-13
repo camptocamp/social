@@ -33,12 +33,13 @@ class MailTemplate(models.Model):
                 partners_with_emails = []
                 partners = self.env['res.partner'].sudo().browse(partner_ids)
                 for partner in partners:
-                    current = partner
-                    while current:
-                        if current.email:
-                            break
-                        current = current.parent_id
-                    partners_with_emails.append(current.id or partner.id)
-
+                    if partner.email:
+                        partners_with_emails.append(partner.id)
+                    elif partner.commercial_partner_id.email:
+                        partners_with_emails.append(
+                            partner.commercial_partner_id.id
+                        )
+                    else:
+                        partner_with_mail.append(partner.id)
                 results[res_id]['partner_ids'] = partners_with_emails
         return results
