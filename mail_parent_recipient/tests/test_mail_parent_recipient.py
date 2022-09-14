@@ -10,6 +10,7 @@ class TestMailTemplate(TestMail):
     @classmethod
     def setUpClass(cls):
         super(TestMailTemplate, cls).setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         cls.Users = cls.env['res.users']
         cls.res_partner = cls.env['res.partner']
