@@ -1,0 +1,1 @@
+odoo-addon-mail_activity_done @git+https://github.com/OCA/social@refs/pull/994/head#subdirectory=setup/mail_activity_done
