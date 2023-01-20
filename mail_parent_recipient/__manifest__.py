@@ -1,4 +1,4 @@
-# Copyright 2018-2022 Camptocamp
+# Copyright 2023 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Mail parent recipient",
