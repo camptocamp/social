@@ -12,5 +12,7 @@ class MailComposeMessage(models.TransientModel):
     def _action_send_mail(self, auto_commit=False):
         for wizard in self:
             wizard = wizard.with_context(notify_followers=wizard.notify_followers)
-            super(MailComposeMessage, wizard)._action_send_mail(auto_commit=auto_commit)
-        return True
+            res = super(MailComposeMessage, wizard)._action_send_mail(
+                auto_commit=auto_commit
+            )
+        return res
