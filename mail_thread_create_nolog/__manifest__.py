@@ -8,6 +8,7 @@
     "website": "https://github.com/OCA/social",
     "author": "Camptocamp SA, Odoo Community Association (OCA)",
     "maintainers": ["sebalix"],
+    "development_status": "Alpha",
     "license": "AGPL-3",
     "installable": True,
     "depends": ["mail"],
