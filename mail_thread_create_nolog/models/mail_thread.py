@@ -9,7 +9,7 @@ class MailThread(models.AbstractModel):
 
     @api.model_create_multi
     def create(self, vals_list):
-        # Overloaded to not create 'Record created' messages that increase
+        # Overridden to not create 'Record created' messages that increase
         # the size of 'mail_message' table for little value.
         # Instead a message will be generated on the fly when the Odoo client
         # will retrieve the list of messages for a given record.
