@@ -11,5 +11,4 @@
     "application": False,
     "installable": True,
     "depends": ["mass_mailing"],
-    "post_init_hook": "post_init_hook",
 }
