@@ -1,6 +1,5 @@
 import base64
-
-from mock import patch
+from unittest.mock import patch
 
 from odoo import exceptions, tools
 from odoo.tests.common import TransactionCase
@@ -20,7 +19,7 @@ class TestMailDropTarget(TransactionCase):
         self.partner.message_process(
             self.partner._name, message, thread_id=self.partner.id
         )
-        self.partner.refresh()
+        self.partner.invalidate_recordset()
         self.assertEqual(comments + 1, len(self.partner.message_ids))
         with self.assertRaises(exceptions.UserError):
             self.partner.message_drop(
@@ -37,7 +36,7 @@ class TestMailDropTarget(TransactionCase):
         self.partner.message_process_msg(
             self.partner._name, message, thread_id=self.partner.id
         )
-        self.partner.refresh()
+        self.partner.invalidate_recordset()
         self.assertEqual(comments + 1, len(self.partner.message_ids))
         msg = self.partner.message_ids.filtered(lambda m: m.subject == "Test")
         self.assertIsNotNone(msg.notified_partner_ids)
@@ -65,7 +64,7 @@ class TestMailDropTarget(TransactionCase):
         self.partner.message_process_msg(
             self.partner._name, message, thread_id=self.partner.id
         )
-        self.partner.refresh()
+        self.partner.invalidate_recordset()
         self.assertEqual(comments + 1, len(self.partner.message_ids))
         msg = self.partner.message_ids.filtered(lambda m: m.subject == "Test")
         self.assertEqual(len(msg.notified_partner_ids), 0)
