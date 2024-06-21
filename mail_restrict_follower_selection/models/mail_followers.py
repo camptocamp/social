@@ -38,7 +38,8 @@ class MailFollowers(models.Model):
             "mail.wizard.invite"
         ]._mail_restrict_follower_selection_get_domain(res_model=res_model)
         partners = self.env["res.partner"].search(
-            [("id", "in", partner_ids)] + safe_eval(domain)
+            [("id", "in", partner_ids)]
+            + safe_eval(domain, locals_dict={"ref": self.env.ref})
         )
         _res_ids = res_ids.copy() or [0]
         new, update = super()._add_followers(
