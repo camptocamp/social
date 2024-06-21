@@ -20,7 +20,7 @@ class MailThread(models.AbstractModel):
         domain = self.env[
             "mail.wizard.invite"
         ]._mail_restrict_follower_selection_get_domain()
-        eval_domain = safe_eval(domain)
+        eval_domain = safe_eval(domain, locals_dict={"ref": self.env.ref})
         for key in result:
             for partner_id, email, reason in result[key]:
                 if partner_id:
