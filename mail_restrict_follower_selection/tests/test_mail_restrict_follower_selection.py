@@ -26,7 +26,7 @@ class TestMailRestrictFollowerSelection(TransactionCase):
     def _use_ref_in_domain(self):
         """Change the general domain to test the safe_eval."""
         param = self.env.ref("mail_restrict_follower_selection.parameter_domain")
-        param.value = "[('country_id', '!=', ref('base.ch').id)]"
+        param.value = "[('country_id', '!=', ref('base.ch'))]"
 
     def test_fields_view_get(self):
         result = self.env["mail.wizard.invite"].fields_view_get(view_type="form")
