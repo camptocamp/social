@@ -30,7 +30,13 @@ class MailTemplate(models.Model):
         if isinstance(res_ids, int):
             multi_mode = False
             results = {res_ids: results}
-        self.generate_attachments(results)
+        active_model = self.env.context.get("active_model")
+        model_id = self.env.context.get("active_id")
+        if active_model and model_id:
+            partner_lang = self.env[active_model].browse(model_id).partner_id.lang
+            self.with_context(lang=partner_lang).generate_attachments(results)
+        else:
+            self.generate_attachments(results)
         return multi_mode and results or results[res_ids]
 
     def generate_attachments(self, results):
