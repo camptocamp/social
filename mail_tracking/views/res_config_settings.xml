@@ -19,6 +19,28 @@
                         </div>
                     </div>
                 </div>
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="mail_tracking_deletion_job_settings"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="enable_mail_tracking_email_deletion_job" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <div class="content-group">
+                            <label
+                                for="enable_mail_tracking_email_deletion_job"
+                                string="Enable deletion of old mail tracking records"
+                            />
+                            <div
+                                class="text-muted"
+                                id="enable_mail_tracking_email_deletion_job"
+                            >
+                                Scheduled job to delete old mail tracking records to reduce the database size.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </field>
     </record>
