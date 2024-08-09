@@ -473,3 +473,26 @@ class MailTrackingEmail(models.Model):
         # - return 'NONE' if this request is not for you
         # - return 'ERROR' if any error
         return "NONE"  # pragma: no cover
+
+    def _get_old_mail_tracking_email_domain(self, max_age_days):
+        target_write_date = fields.Datetime.subtract(
+            fields.Datetime.now(), days=max_age_days
+        )
+        return [("write_date", "<", target_write_date)]
+
+    @api.autovacuum
+    def _gc_mail_tracking_email(self, max_age_days=180, limit=5000):
+        enable_deletion = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mail_tracking.enable_old_mail_tracking_email_deletion")
+        )
+
+        if not enable_deletion:
+            _logger.info("Mail tracking email deletion is disabled.")
+            return False
+
+        domain = self._get_old_mail_tracking_email_domain(max_age_days)
+        records_to_delete = self.search(domain, limit=limit)
+        _logger.debug("Deleting %s mail.tracking.email records", len(records_to_delete))
+        return records_to_delete.unlink()
