@@ -8,9 +8,13 @@
     "category": "Discuss",
     "website": "https://github.com/OCA/social",
     "summary": "Attach emails to Odoo by dragging them from your desktop",
-    "depends": ["mail"],
+    "depends": ["mail", "mass_mailing"],
     "external_dependencies": {"python": ["extract_msg", "cryptography<37"]},
-    "data": ["views/res_config_settings_views.xml"],
+    "data": [
+        "security/groups.xml",
+        "security/ir.model.access.csv",
+        "views/res_config_settings_views.xml",
+    ],
     "assets": {
         "web.assets_backend": [
             "mail_drop_target/static/src/js/file_uploader.esm.js",
