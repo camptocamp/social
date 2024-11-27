@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<odoo>
+  <record id="mail_activity_type_form_inherit" model="ir.ui.view">
+    <field name="model">mail.activity.type</field>
+    <field name="inherit_id" ref="mail.mail_activity_type_view_form" />
+    <field name="arch" type="xml">
+      <field name="res_model" position="after">
+        <field name="model_id" invisible="1" />
+        <field name="default_user_field_id" />
+      </field>
+    </field>
+  </record>
+</odoo>
