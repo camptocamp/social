@@ -6,7 +6,7 @@ import logging
 import uuid
 from base64 import b64encode
 from email.mime.image import MIMEImage
-
+from email.mime.multipart import MIMEMultipart
 import requests
 from lxml.html import fromstring, tostring
 
@@ -40,6 +40,8 @@ class IrMailServer(models.Model):
         fileparts = None
         if subtype == "html" and image_embedding_method != "none":
             body, fileparts = self._build_email_replace_img_src(body)
+
+        # TODO check if we can add attachments here.    
         result = super(IrMailServer, self).build_email(
             email_from=email_from,
             email_to=email_to,
@@ -58,12 +60,56 @@ class IrMailServer(models.Model):
             subtype_alternative=subtype_alternative,
         )
         if fileparts:
-            for fpart in fileparts:
-                result.attach(fpart)
             # Multipart method MUST be multipart/related for CIDs embedding
             # Gmail and Office won't process the images otherwise
             if image_embedding_method == "cid":
                 result.set_type("multipart/related")
+
+            for fpart in fileparts:
+                result.attach(fpart)
+
+            # after all part where added, we need to reorganize the parts
+            # before reorganisation, the parts are in this shape:
+            # - boundary 1
+            #   - text/plain
+            #   - text/html
+            #   - image/png
+            # After, the parts are in this shape:
+            # - boundary 1
+            #   - multipart/alternative
+            #     - boundary 2
+            #       - text/plain
+            #       - text/html
+            #   - image/png
+
+            # maybe I could user: result.make_alternative() / result.make_related()
+
+            all_parts = []
+
+            # if an attachment is present, the parts are already in the right order
+            # in this case, we don't need to reorganize the parts
+            # but if we find later text/plain or text/html parts, we will need to append them to the first multipart/alternative.
+            #
+            # It possible to have multiple parts of type multipart/alternative, but it's not a common case.
+
+            # TODO try to used: _add_multipart() method from email/message.py
+            for part in result.iter_parts():
+                if part.get_content_type() == 'multipart/alternative':
+                    all_parts.append(part)
+
+            if not all_parts:
+                all_parts = [MIMEMultipart("alternative")]
+
+            for part in result.iter_parts():
+                print(part.get_content_type())
+                if part.get_content_type() in ["text/html", "text/plain"]:
+                    all_parts[0].attach(part)
+                elif part.get_content_type() == "multipart/alternative":
+                    pass
+                else:
+                    all_parts.append(part)
+            result.set_payload(all_parts)
+
         return result
 
     def _build_email_replace_img_src(self, html_body):
