@@ -105,6 +105,8 @@ class IrMailServer(models.Model):
                             "inline",
                             filename=filename_encoded,
                         )
+                        filepart.add_header("content-transfer-encoding", "base64")
+                        filepart.add_header("content-type", "message/image")
                         img.set("src", f"cid:{cid}")
                         fileparts.append(filepart)
                 else:
