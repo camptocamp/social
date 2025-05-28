@@ -3,10 +3,12 @@
 
 from odoo_test_helper import FakeModelLoader
 
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestMailserverByModel(TransactionCase):
+class TestMailserverByModel(BaseCommon):
     at_install = False
     post_install = True
 
@@ -72,7 +74,7 @@ class TestMailserverByModel(TransactionCase):
         composer = Form(
             self.env["mail.compose.message"].with_context(
                 default_model=record._name,
-                default_res_id=record.id,
+                default_res_ids=record.ids,
                 default_use_template=True,
                 default_template_id=self.mail_template.id,
                 default_composition_mode="comment",
