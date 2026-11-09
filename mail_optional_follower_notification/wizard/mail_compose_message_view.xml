@@ -6,8 +6,14 @@
         <field name="arch" type="xml">
             <!-- Odoo 19 removed document_followers_text; expose the choice before the subject. -->
             <xpath expr="//field[@name='subject']" position="before">
-                <field name="notify_followers" invisible="composition_mode == 'mass_mail'" />
-                <div class="text-warning" invisible="notify_followers or composition_mode == 'mass_mail'">
+                <field
+                    name="notify_followers"
+                    invisible="composition_mode == 'mass_mail'"
+                />
+                <div
+                    class="text-warning"
+                    invisible="notify_followers or composition_mode == 'mass_mail'"
+                >
                     Followers will not be notified, but can still access the message from the document if allowed.
                 </div>
             </xpath>

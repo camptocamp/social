@@ -3,7 +3,7 @@
 {
     "name": "Mail optional follower notification",
     "summary": "Choose to notify followers on mail.compose.message",
-    "author": "ACSONE SA/NV," "Odoo Community Association (OCA)",
+    "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "category": "Social Network",
     "version": "19.0.1.0.0",
